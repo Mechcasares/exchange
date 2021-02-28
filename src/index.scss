@@ -1,0 +1,154 @@
+@import "reset";
+
+//FONTS
+$font: "Roboto";
+$h1: 1.4167rem;
+$h2: 1.25;
+$h3: 1.0833rem;
+$b: 0.8rem;
+
+//COLORS
+
+$primary: #ff7141;
+$black: #313131;
+$greyd: #878788;
+$greyc: #b9b9b9;
+$disable: #b9b9b9;
+$white: #f7f7f7;
+$shadow: rgba(0, 0, 0, 0.1);
+
+// MIXINS
+@mixin flexbox($jc: center, $ai: center, $dir: column) {
+  justify-content: $jc;
+  align-items: $ai;
+
+  @if $dir==row {
+    flex-direction: $dir;
+  }
+}
+
+@mixin text(
+  $fw: bolder,
+  $fs: 2rem,
+  $as: flex-start,
+  $tt: uppercase,
+  $c: $black
+) {
+  font-weight: $fw;
+  font-size: $fs;
+  align-self: $as;
+  text-transform: $tt;
+  color: $c;
+}
+
+@mixin animation($e: all, $t: 0.5s, $d: 0s) {
+  transition: $e $t cubic-bezier(0.8, 0, 0.2, 1) $d;
+}
+
+@mixin button(
+  $h: 2.25rem,
+  $c: white,
+  $bg: $primary,
+  $hover_c: white,
+  $hover_bg: $black
+) {
+  @include animation();
+  font-size: $b;
+  height: $h;
+  color: $c;
+  background-color: $bg;
+  align-items: center;
+  border: none;
+  border-radius: 300px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 $primary;
+  a {
+    color: $c;
+  }
+
+  @if $hover_c {
+    &:hover {
+      color: $hover_c;
+      background: $hover_bg;
+      box-shadow: 0 2px 5px 0 $black;
+    }
+  }
+}
+
+@mixin secondary_button($b: $primary, $bh: $black) {
+  @include button(2.25rem, $primary, unset, white, $black);
+  border: 0.01rem solid $b;
+  font-size: 0.8rem;
+
+  &:hover {
+    border: 0.01rem solid $bh;
+  }
+}
+
+@mixin filter($bg: $primary, $c: $black) {
+  @include flexbox(center, center, row);
+
+  svg {
+    position: relative;
+    right: 1.5rem;
+  }
+
+  select,
+  input {
+    @extend %shadow;
+    -webkit-appearance: none;
+    width: 12rem;
+    height: 1.7rem;
+    background: $bg;
+    color: $c;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem ;
+    border-radius: 0.2rem;
+  }
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: $black;
+    z-index: 1;
+  }
+}
+
+// EXTENDS
+
+%shadow {
+  box-shadow: 0 2px 5px 0 $shadow;
+}
+
+// GLOBAL STYLES
+body {
+  background-color: $white;
+  font-family: $font;
+}
+
+.select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  > select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+  }
+}
