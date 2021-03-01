@@ -57,7 +57,7 @@ export default connect(
             </div>
             <h3>Ingresa la fecha de cotización</h3>
             <div className="input_date">
-              <input type="date" id="myDate" value="2010-01-12" required/>
+              <input type="date" id="myDate" value="2010-01-12" required />
               <Calendar />
             </div>
             <button type="submit">Buscas cotizacion</button>

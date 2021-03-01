@@ -1,6 +1,7 @@
 @import "reset";
 
 //FONTS
+
 $font: "Roboto";
 $h1: 1.4167rem;
 $h2: 1.25;
@@ -18,6 +19,7 @@ $white: #f7f7f7;
 $shadow: rgba(0, 0, 0, 0.1);
 
 // MIXINS
+
 @mixin flexbox($jc: center, $ai: center, $dir: column) {
   justify-content: $jc;
   align-items: $ai;
@@ -124,6 +126,7 @@ $shadow: rgba(0, 0, 0, 0.1);
 }
 
 // GLOBAL STYLES
+
 body {
   background-color: $white;
   font-family: $font;
