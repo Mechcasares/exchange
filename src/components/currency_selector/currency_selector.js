@@ -32,10 +32,24 @@ export default connect(
     }
 
     handleSelectChangeRate(event) {
-      this.props.selectedTeam(event.target.value);
+      this.props.selectedCurrency(event.target.value);
     }
 
+    datePicker = (e) => {
+      this.setState({
+        initialDate: e.target.value,
+      });
+      if (this.state.endDate < e.target.value) {
+        this.setState({
+          endDate: "",
+        });
+        this.props.closedFilters("", "to");
+      }
+      this.props.closedFilters(e.target.value, "from");
+    };
+
     render() {
+      const { get_currency } = this.props;
       return (
         <div id="currency_selector">
           <h1>Historico de cotizaciones</h1>
@@ -46,8 +60,8 @@ export default connect(
                 value={this.state.value}
                 onChange={(e) => this.handleSelectChangeRate(e)}
               >
-                {this.props.get_currency.rates
-                  ? Object.keys(this.props.get_currency.rates).map((rate) => (
+                {get_currency.rates
+                  ? Object.keys(get_currency.rates).map((rate) => (
                       <option value={rate}>{rate}</option>
                     ))
                   : null}
@@ -61,7 +75,7 @@ export default connect(
               <input
                 type="date"
                 id="myDate"
-                onChange={(e) => this.dateReceiver(e)}
+                onChange={(e) => this.datePicker(e)}
               />
               <Calendar />
             </div>
