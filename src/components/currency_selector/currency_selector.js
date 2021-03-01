@@ -35,19 +35,6 @@ export default connect(
       this.props.selectedCurrency(event.target.value);
     }
 
-    datePicker = (e) => {
-      this.setState({
-        initialDate: e.target.value,
-      });
-      if (this.state.endDate < e.target.value) {
-        this.setState({
-          endDate: "",
-        });
-        this.props.closedFilters("", "to");
-      }
-      this.props.closedFilters(e.target.value, "from");
-    };
-
     render() {
       const { get_currency } = this.props;
       return (
@@ -68,18 +55,11 @@ export default connect(
               </select>
               <Arrow />
             </div>
-
             <h3>Ingresa la fecha de cotización</h3>
-
             <div className="input_date">
-              <input
-                type="date"
-                id="myDate"
-                onChange={(e) => this.datePicker(e)}
-              />
+              <input type="date" id="myDate" value="2010-01-12" required/>
               <Calendar />
             </div>
-
             <button type="submit">Buscas cotizacion</button>
           </div>
         </div>

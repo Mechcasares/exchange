@@ -98,12 +98,14 @@ $shadow: rgba(0, 0, 0, 0.1);
   input {
     @extend %shadow;
     -webkit-appearance: none;
-    width: 13rem;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    width: 14rem;
     height: 1.7rem;
     background: $bg;
     color: $c;
     font-size: 0.8rem;
-    padding: 0.25rem 0.5rem ;
+    padding: 0.25rem 0.5rem;
     border-radius: 0.2rem;
   }
 

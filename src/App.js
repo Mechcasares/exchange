@@ -24,6 +24,7 @@ export default connect(
       super();
       this.state = {
         selectedCurrency: "",
+        selectedDate: "",
       };
     }
 
@@ -36,6 +37,17 @@ export default connect(
         selectedCurrency: rate,
       });
     }
+    dateReceiver(date) {
+      this.setState({
+        selectedDate: date,
+      });
+    }
+
+    toggle = () => {
+      this.setState({
+        on: !this.state.on,
+      });
+    };
 
     render() {
       const { get_currency } = this.props;
@@ -46,23 +58,30 @@ export default connect(
             <CurrencySelector
               selectedCurrency={(rate) => this.currencyReceiver(rate)}
             />
-
             <div className="currency_display">
               {get_currency.rates
                 ? Object.keys(get_currency.rates)
                     .filter((rate) => {
-                      //removes names that do not match current filter text
                       return rate.includes(this.state.selectedCurrency);
                     })
                     .map((rate) => (
-                      <tr>
-                        <td value={rate}>{rate}</td>
-                        <td value={rate}>{get_currency.rates[rate]}</td>
-                      </tr>
+                      <>
+                        {this.state.on ? (
+                          <tr>
+                            <td value={rate}>{rate}</td>
+                            <td value={rate}>{get_currency.rates[rate]}</td>
+                          </tr>
+                        ) : (
+                          <tr className="off">
+                            <td value={rate}>{rate}</td>
+                            <td value={rate}>{get_currency.rates[rate]}</td>
+                          </tr>
+                        )}
+                      </>
                     ))
                 : null}
               <button onClick={this.toggle} type="submit">
-                Ver más cotizaciones
+                {this.state.on ? "Ver menos" : "Ver más cotizaciones"}
               </button>
             </div>
           </div>
